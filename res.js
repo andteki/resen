@@ -4,6 +4,9 @@ const { Command } = require('commander');
 const { get } = require('./comp/getmethod');
 const { post } = require('./comp/postmethod');
 const { del } = require('./comp/deletemethod');
+const { convertToObject } = require('./comp/tools');
+const { put } = require('./comp/putmethod');
+const { patch } = require('./comp/patchmethod');
 
 
 const program = new Command();
@@ -30,12 +33,24 @@ program
     .command('post <url> [params...]')
     .description('POST method')
     .action((url, params) => {
-        const data = params.reduce((acc, param) => {
-            const [key, value] = param.split('=')
-            acc[key] = value
-            return acc
-        }, {})
+        const data = convertToObject(params)
         post(url, data)
+    })
+
+program
+    .command('put <url> [params...]')
+    .description('PUT method')
+    .action((url, params) => {
+        const data = convertToObject(params)
+        put(url, data)
+    })
+
+program
+    .command('patch <url> [params...]')
+    .description('PATCH method')
+    .action((url, params) => {
+        const data = convertToObject(params)
+        patch(url, data)
     })
 
 program

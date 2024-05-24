@@ -12,4 +12,16 @@ const printHeader = (headers) => {
     console.log('X-Powered-By:', headers['x-powered-by'])
 }
 
-module.exports = { normalizeUrl, printHeader }
+const convertToObject = (params) => {
+    return params.reduce((acc, param) => {
+        const [key, value] = param.split('=')
+        acc[key] = value
+        return acc
+    }, {})
+}
+
+module.exports = { 
+    normalizeUrl, 
+    printHeader,
+    convertToObject
+}
