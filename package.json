@@ -15,5 +15,9 @@
     "@medv/prettyjson": "^1.0.1",
     "axios": "^1.7.2",
     "commander": "^12.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andteki/resen.git"
+  }  
 }
