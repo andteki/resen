@@ -26,7 +26,7 @@ const convertToObject = (params) => {
     }, {})
 }
 
-const getAuthString = (options) => {    
+const getAuthStr = (options) => {    
     if(!options.hasOwnProperty('auth')) {
         console.log('No token specified')
         return
@@ -40,8 +40,7 @@ const getAuthString = (options) => {
         return
     }
     return { headers: {
-        'Authorization': `Bearer ${options.auth}`,
-        'Content-Type': 'application/json' 
+        'Authorization': `Bearer ${options.auth}`
         }}
 }
 
@@ -49,12 +48,11 @@ const isEmpty = (obj) => {
     return Object.keys(obj).length === 0
 }
 
-
 module.exports = { 
     normalizeUrl, 
     printHeader,
     printBody,
     convertToObject,
-    getAuthString,
+    getAuthStr,
     isEmpty
 }

@@ -1,4 +1,6 @@
-# Resen command-line HTTP client
+# Resen
+
+The Resen a command-line HTTP client.
 
 Simple command-line HTTP client.
 
@@ -16,7 +18,7 @@ The HTTPie command is a very good program, but it cannot be installed with the n
 npm i -g resen
 ```
 
-After installation, we get a res command. Check:
+After installation, we get a **res** command. Check:
 
 ```cmd
 res --version
@@ -78,6 +80,25 @@ DELETE method:
 res delete localhost:8000/employees/1
 ```
 
-## TODO
+## Authentication
 
-Use bearer token
+Options:
+
+* --auth-type bearer
+* --auth token
+
+Currently, only the Bearer token is supported.
+
+Using example:
+
+```cmd
+res delete localhost:8000/employees 
+--auth-type bearer --auth f3a434...
+```
+
+Short form:
+
+```cmd
+res delete localhost:8000/employees 
+-A bearer -a f3a434...
+```
