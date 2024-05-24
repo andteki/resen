@@ -6,7 +6,6 @@ const normalizeUrl = (url) => {
 }
 
 const printHeader = (headers) => {
-    // console.log(headers)
     console.log('Content-Type:',headers['content-type'])
     console.log('Date:', headers.date)
     console.log('X-Powered-By:', headers['x-powered-by'])

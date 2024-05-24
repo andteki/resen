@@ -14,7 +14,7 @@ const program = new Command();
 program
     .name('res')
     .description('Command-line HTTP client')
-    .version('0.0.1');
+    .version('0.9.0');
 
 program
     .argument('<url>', 'Server url')
@@ -31,7 +31,7 @@ program
 
 program
     .command('post <url> [params...]')
-    .description('POST method')
+    .description('POST method. The params: Key=value pairs, separated by spaces.')
     .action((url, params) => {
         const data = convertToObject(params)
         post(url, data)
