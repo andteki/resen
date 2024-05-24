@@ -6,6 +6,10 @@ GitHub:
 
 * [https://github.com/andteki/resen.git](https://github.com/andteki/resen.git)
 
+## Why
+
+The HTTPie command is a very good program, but it cannot be installed with the npm package manager. What we have is not a command line program.
+
 ## Install
 
 ```cmd
