@@ -14,7 +14,7 @@ const program = new Command();
 program
     .name('res')
     .description('Command-line HTTP client')
-    .version('0.9.0');
+    .version('0.9.1');
 
 program
     .argument('<url>', 'Server url')
