@@ -2,20 +2,24 @@ const axios = require('axios').default
 const print = require('@medv/prettyjson')
 const { normalizeUrl, printHeader } = require('./tools')
 
-const get = async (url) => {
+
+
+const post = async (url, data) => {
     try {
-        await tryGet(url)
+        await tryPost(url, data)
     } catch (error) {
         console.error(error)
     }
 }
 
-const tryGet = async (url) => {
+const tryPost = async (url, data) => {    
     url = normalizeUrl(url)
-    const res = await axios.get(url)
+    const res = await axios.post(url, data)
     console.log(res.status)
     printHeader(res.headers)    
     console.log(print(res.data))
 }
 
-module.exports.get = get
+
+
+module.exports.post = post
