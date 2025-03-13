@@ -21,11 +21,11 @@ const put = async (url, data, options) => {
 const send = async (url, data, options) => {
     try {
         return await trySend(url, data, options)
-    } catch (err) {
-        if(err.response != undefined) {
-            printErrorHeader(err)
+    } catch (error) {
+        if(error.response != undefined) {
+            printErrorHeader(error)
         }else {
-            console.error(err.errors)
+            console.error(error.errors)
         }
     }
 }

@@ -21,15 +21,15 @@ const get = async (url, options) => {
 const send = async (url, options) => {
     try {
         return await trySend(url, options)
-    } catch (err) {
-        if(err.response != undefined && err.response.data != undefined) {
-            if(err.response != undefined) {
-                printErrorHeader(err)
+    } catch (error) {
+        if(error.response != undefined && error.response.data != undefined) {
+            if(error.response != undefined) {
+                printErrorHeader(error)
             }else {
-                console.error(err.errors)
+                console.error(error.errors)
             }
         }else {
-            console.error(err.errors)
+            console.error(error.errors)
         }
         
     }

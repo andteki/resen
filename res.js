@@ -13,7 +13,7 @@ const program = new Command();
 program
     .name('res')
     .description('Command-line HTTP client')
-    .version('0.11.1')
+    .version('0.11.2')
 
 program
     .argument('<url>', 'Server url')

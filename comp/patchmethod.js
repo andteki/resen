@@ -23,10 +23,10 @@ const send = async (url, data, options) => {
     try {
         return await trySend(url, data, options)
     } catch (error) {
-        if(err.response != undefined) {
-            printErrorHeader(err)
+        if(error.response != undefined) {
+            printErrorHeader(error)
         }else {
-            console.error(err.errors)
+            console.error(error.errors)
         }
     }
 }
