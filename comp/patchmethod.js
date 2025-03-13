@@ -1,11 +1,13 @@
 const axios = require('axios').default
 const print = require('@medv/prettyjson')
+
 const { 
     normalizeUrl,
     getAuthStr,
     isEmpty,
     printHeader,
-    printBody
+    printBody,
+    printErrorHeader
 } = require('./tools')
 
 const patch = async (url, data, options) => {    
@@ -21,7 +23,11 @@ const send = async (url, data, options) => {
     try {
         return await trySend(url, data, options)
     } catch (error) {
-        console.error(print(error.response.data))
+        if(err.response != undefined) {
+            printErrorHeader(err)
+        }else {
+            console.error(err.errors)
+        }
     }
 }
 

@@ -5,7 +5,8 @@ const {
     getAuthStr,
     isEmpty,
     printHeader,
-    printBody
+    printBody,
+    printErrorHeader
 } = require('./tools')
 
 const get = async (url, options) => {
@@ -20,8 +21,17 @@ const get = async (url, options) => {
 const send = async (url, options) => {
     try {
         return await trySend(url, options)
-    } catch (error) {
-        console.error(print(error.response.data))
+    } catch (err) {
+        if(err.response != undefined && err.response.data != undefined) {
+            if(err.response != undefined) {
+                printErrorHeader(err)
+            }else {
+                console.error(err.errors)
+            }
+        }else {
+            console.error(err.errors)
+        }
+        
     }
 }
 

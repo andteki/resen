@@ -5,11 +5,14 @@ const {
     getAuthStr,
     isEmpty,
     printHeader,
-    printBody
+    printBody,
+    printErrorHeader
 } = require('./tools')
 
 const post = async (url, data, options) => {
-    console.log(options.authType)
+    if(options.hasOwnProperty('authType')) {
+        console.log(options.authType)
+    }    
     url = normalizeUrl(url)
     const res = await send(url, data, options);
     if(res != null) {        
@@ -22,7 +25,11 @@ const send = async (url, data, options) => {
     try {
         return await trySend(url, data, options)
     } catch (error) {
-        console.error(print(error.response.data))
+        if(err.response != undefined) {
+            printErrorHeader(err)
+        }else {
+            console.error(err.errors)
+        }
     }
 }
 

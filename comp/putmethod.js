@@ -1,5 +1,6 @@
 const axios = require('axios').default
 const print = require('@medv/prettyjson')
+const { printErrorHeader } = require('./tools')
 const { 
     normalizeUrl,
     getAuthStr,
@@ -8,7 +9,7 @@ const {
     printBody
 } = require('./tools')
 
-const put = async (url, data, options) => {    
+const put = async (url, data, options) => {
     url = normalizeUrl(url)
     const res = await send(url, data, options)
     if(res != null) {        
@@ -20,8 +21,12 @@ const put = async (url, data, options) => {
 const send = async (url, data, options) => {
     try {
         return await trySend(url, data, options)
-    } catch (error) {
-        console.error(print(error.response.data))
+    } catch (err) {
+        if(err.response != undefined) {
+            printErrorHeader(err)
+        }else {
+            console.error(err.errors)
+        }
     }
 }
 
