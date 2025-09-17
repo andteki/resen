@@ -53,6 +53,10 @@ res localhost:8000/employees
 ```
 
 ```cmd
+res :8000/employees
+```
+
+```cmd
 res get localhost:8000/employees
 ```
 
