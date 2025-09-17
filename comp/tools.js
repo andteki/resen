@@ -1,6 +1,9 @@
 const print = require('@medv/prettyjson')
 
 const normalizeUrl = (url) => {
+    if (url.startsWith('/') || url.startsWith(':')){
+        url = 'localhost' + url
+    }
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
         url = 'http://' + url
     }
