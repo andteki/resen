@@ -1,6 +1,6 @@
 {
   "name": "resen",
-  "version": "0.11.3",
+  "version": "0.12.0",
   "description": "Command-line HTTP client",
   "bin": {
     "res": "res.js"
