@@ -25,7 +25,7 @@ function handler() {
     program
         .name('res')
         .description('Command-line HTTP client')
-        .version('0.12.0')
+        .version('0.12.1')
 
     program
         .argument('<url>', 'Server url')
