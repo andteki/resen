@@ -1,17 +1,20 @@
 const axios = require('axios').default
+const AxiosDigestAuth = require('@acidemic/axios-digest-auth').default
 const print = require('@medv/prettyjson')
+
 const { 
     normalizeUrl,
     getAuthStr,
     isEmpty,
     printHeader,
     printBody,
-    printErrorHeader
+    printErrorHeader,
+    getDigestData
 } = require('./tools')
 
 const get = async (url, options) => {
     url = normalizeUrl(url)    
-    const res = await send(url, options)    
+    const res = await send(url, options)
     if(res != null) {
         printHeader(res)
         printBody(res)
@@ -36,10 +39,17 @@ const send = async (url, options) => {
 }
 
 const trySend = async (url, options) => {
-    if(!isEmpty(options)) {        
-        const auth = getAuthStr(options)
-        const res = await axios.get(url, auth)        
-        return res
+    if(!isEmpty(options)) {
+        if(options.hasOwnProperty('authType')) {
+            if(options.authType == 'digest') {
+                const data = getDigestData(options, 'GET', url)
+                const auth = new AxiosDigestAuth(data.authData)
+                return await auth.request(data.requestData)
+            }else {
+                const auth = getAuthStr(options)
+                return await axios.get(url, auth)
+            }
+        }
     }else {
         return await axios.get(url)
     }    

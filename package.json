@@ -8,16 +8,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["http", "client", "rest api", "command-line"],
+  "keywords": [
+    "http",
+    "client",
+    "rest api",
+    "command-line"
+  ],
   "author": "Sallai Andras",
   "license": "ISC",
   "dependencies": {
+    "@acidemic/axios-digest-auth": "^0.9.9",
     "@medv/prettyjson": "^1.0.1",
+    "@mhoc/axios-digest-auth": "^0.8.0",
     "axios": "^1.7.2",
     "commander": "^12.1.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/andteki/resen.git"
-  }  
+  }
 }

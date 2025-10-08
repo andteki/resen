@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      '@acidemic/axios-digest-auth':
+        specifier: ^0.9.9
+        version: 0.9.9
       '@medv/prettyjson':
         specifier: ^1.0.1
         version: 1.0.1
+      '@mhoc/axios-digest-auth':
+        specifier: ^0.8.0
+        version: 0.8.0
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -20,8 +26,14 @@ importers:
 
 packages:
 
+  '@acidemic/axios-digest-auth@0.9.9':
+    resolution: {integrity: sha512-zeXNjvS4YSXrFqsK1WGFziZJO5lkCRh/4Kiq+tlsrSOozSul8kkl6+QvfaUIq82jh9ixDH9vghkOJ+ASPOlZog==}
+
   '@medv/prettyjson@1.0.1':
     resolution: {integrity: sha512-JnIV8EIfbPUKLB9qdmgLMCOALotwAb8sHGnomOOPfNBOpBHZepPfRltqUADQb2P9XUCaT/6qAgYfOCUSrXDCSg==}
+
+  '@mhoc/axios-digest-auth@0.8.0':
+    resolution: {integrity: sha512-CEU6AhrPWjznB/uGCvEKNQ9Fa0Gw8gjIXyky6sjRbJz6GsBovef0rdsu6fokE3A7+ncsVsGWlDnt5byOs9mSGw==}
 
   ansi-styles@3.2.1:
     resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
@@ -29,6 +41,9 @@ packages:
 
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
+
+  axios@0.22.0:
+    resolution: {integrity: sha512-Z0U3uhqQeg1oNcihswf4ZD57O3NrR1+ZXhxaROaWpDmsDTx7T2HNBV2ulBtie2hwJptu8UvgnJoK+BIqdzh/1w==}
 
   axios@1.7.2:
     resolution: {integrity: sha512-2A8QhOMrbomlDuiLeK9XibIBzuHeRcqqNOHp0Cyp5EoJ1IFDh+XZH3A6BkXtv0K4gFGCI0Y4BM7B1wOEi0Rmgw==}
@@ -97,16 +112,34 @@ packages:
 
 snapshots:
 
+  '@acidemic/axios-digest-auth@0.9.9':
+    dependencies:
+      axios: 0.22.0
+    transitivePeerDependencies:
+      - debug
+
   '@medv/prettyjson@1.0.1':
     dependencies:
       chalk: 2.4.2
       indent-string: 3.2.0
+
+  '@mhoc/axios-digest-auth@0.8.0':
+    dependencies:
+      axios: 0.22.0
+    transitivePeerDependencies:
+      - debug
 
   ansi-styles@3.2.1:
     dependencies:
       color-convert: 1.9.3
 
   asynckit@0.4.0: {}
+
+  axios@0.22.0:
+    dependencies:
+      follow-redirects: 1.15.6
+    transitivePeerDependencies:
+      - debug
 
   axios@1.7.2:
     dependencies:

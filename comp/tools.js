@@ -63,7 +63,7 @@ const convertToObject = (params) => {
     }, {})
 }
 
-const getAuthStr = (options) => {    
+const getAuthStr = (options, method='get', url='') => {
     if(!options.hasOwnProperty('auth')) {
         console.log('No token specified')
         return
@@ -73,12 +73,28 @@ const getAuthStr = (options) => {
         return
     }
     if(options.authType != 'bearer') {
-        console.log('Only bearer')
+        console.log('Unsupported auth type. Supported: bearer')
         return
     }
-    return { headers: {
-        'Authorization': `Bearer ${options.auth}`
-    }}
+    return {
+        headers: {
+            'Authorization': `Bearer ${options.auth}`
+        }
+    }
+}
+
+const getDigestData = (options, method, url) => {
+    return {
+        authData: {
+            username: options.auth.split(':')[0],
+            password: options.auth.split(':')[1]            
+        },
+        requestData: {
+            headers: { Accept: "application/json" },
+            method: method,
+            url: url
+        }
+    }
 }
 
 const isEmpty = (obj) => {
@@ -92,5 +108,6 @@ module.exports = {
     printErrorHeader,
     convertToObject,
     getAuthStr,
-    isEmpty
+    isEmpty,
+    getDigestData
 }
