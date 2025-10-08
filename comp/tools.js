@@ -1,5 +1,9 @@
 const print = require('@medv/prettyjson')
 
+const green = '\x1b[34m';
+const blue = '\x1b[34m';
+const reset = '\x1b[0m';
+
 const normalizeUrl = (url) => {
     if (url.startsWith('/') || url.startsWith(':')){
         url = 'localhost' + url
@@ -11,10 +15,19 @@ const normalizeUrl = (url) => {
 }
 
 const printHeader = (res) => {
-    console.log(res.status, res.statusText)
-    console.log('Content-Type:', res.headers['content-type'])
-    console.log('Date:', res.headers.date)
-    console.log('X-Powered-By:', res.headers['x-powered-by'])
+    console.log(`${blue}HTTP/` + res.request.res.httpVersion, 
+        res.status, `${green}`, 
+        res.statusText, `${reset}`)
+    const headerKeys = Object.keys(res.headers)
+    headerKeys.sort()
+    for(const key of headerKeys) {
+        const goodKey = capitalizeFirstLetter(key)
+        console.log(`${green}${goodKey}${reset}` + `: ${res.headers[key]}`)
+    }    
+}
+
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const printBody = (res) => {
@@ -22,8 +35,6 @@ const printBody = (res) => {
 }
 
 const printErrorHeader = (err) => {
-    const green = '\x1b[34m';
-    const reset = '\x1b[0m';
     const firstLine = err.response.request._header.split('\r\n')[0];
     const httpVersion = firstLine.split(' ')[2];
     console.log(        
