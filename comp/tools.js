@@ -78,7 +78,7 @@ const getAuthStr = (options) => {
     }
     return { headers: {
         'Authorization': `Bearer ${options.auth}`
-        }}
+    }}
 }
 
 const isEmpty = (obj) => {
