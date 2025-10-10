@@ -122,6 +122,14 @@ const getDigestData = (url, method, data, options) => {
     }
 }
 
+const getSimpleHeader = (url, method, data, options) => {    
+    return {
+        headers: {
+            'Accept': `application/json`
+        }
+    }
+}
+
 const isEmpty = (obj) => {
     return Object.keys(obj).length === 0
 }
@@ -136,5 +144,6 @@ module.exports = {
     isEmpty,
     getDigestData,
     getStdinData,
-    getBasicHeader
+    getBasicHeader,
+    getSimpleHeader
 }

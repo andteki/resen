@@ -2,6 +2,7 @@
 
 const { Command } = require('commander');
 const { startSend } = require('./comp/sender');
+const version = '0.13.2';
 
 function commandParse() {
     const program = new Command();
@@ -9,7 +10,7 @@ function commandParse() {
     program
         .name('res')
         .description('Command-line HTTP client')
-        .version('0.13.1')
+        .version(version)
 
     program
         .argument('<url>', 'Server url')
@@ -17,8 +18,8 @@ function commandParse() {
         .option('-A, --auth-type <type>', 'The authentication mechanism. bearer|basic|digest')
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
-        .action((url, options) => {
-            startSend(url, 'GET', {}, options)
+        .action(async (url, options) => {
+            await startSend(url, 'GET', {}, options, version)
         })
 
     program
@@ -28,8 +29,8 @@ function commandParse() {
         .option('-A, --auth-type <type>', 'The authentication mechanism. bearer|basic|digest')
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
-        .action((url, options) => {
-            startSend(url, 'GET', {}, options)
+        .action(async (url, options) => {
+            await startSend(url, 'GET', {}, options, version)
         })
 
     program
@@ -40,7 +41,7 @@ function commandParse() {
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
         .action(async (url, params, options) => {
-            await startSend(url, 'POST', params, options)
+            await startSend(url, 'POST', params, options, version)
         })
 
     program
@@ -51,7 +52,7 @@ function commandParse() {
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
         .action((url, params, options) => {
-            startSend(url, 'PUT', params, options)
+            startSend(url, 'PUT', params, options, version)
         })
 
     program
@@ -62,7 +63,7 @@ function commandParse() {
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
         .action((url, params, options) => {
-            startSend(url, 'PATCH', params, options)           
+            startSend(url, 'PATCH', params, options, version)           
         })
 
     program
@@ -73,7 +74,7 @@ function commandParse() {
         .option('-I, --ignore-stdin', 'Do not attempt to read stdin')
         .parse()
         .action((url, options) => {
-            startSend(url, 'DELETE', {}, options)
+            startSend(url, 'DELETE', {}, options, version)
         })
 
     program.parse()
