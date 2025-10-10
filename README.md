@@ -90,8 +90,12 @@ Options:
 
 * --auth-type bearer
 * --auth token
+* --auth-type digest
 
-Currently, only the Bearer token is supported.
+Supported auth types:
+
+* bearer
+* digest
 
 Using example:
 
@@ -105,4 +109,11 @@ Short form:
 ```cmd
 res delete localhost:8000/employees 
 -A bearer -a f3a434...
+```
+
+### Digest auhtentication example
+
+```cmd
+res delete localhost:8000/api/employees 
+-A digest -a tom:secret
 ```

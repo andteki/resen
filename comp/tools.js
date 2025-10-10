@@ -31,6 +31,7 @@ const capitalizeFirstLetter = (string) => {
 }
 
 const printBody = (res) => {
+    console.log()
     console.log(print(res.data))
 }
 
@@ -52,30 +53,44 @@ const printErrorHeader = (err) => {
     console.log(`${green}Keep-Alive:${reset}`, err.response.headers['keep-alive'])
     console.log(`${green}X-Powered-By:${reset}`, err.response.headers['x-powered-by'])
     console.log()
+    console.log()
     console.log(print(err.response.data))
 }
 
-const convertToObject = (params) => {
-    return params.reduce((acc, param) => {
-        const [key, value] = param.split('=')
-        acc[key] = value
-        return acc
-    }, {})
+const convertToObject = async (params) => {
+    return new Promise((resolve, reject) => {
+        const result = params.reduce((acc, param) => {
+            const [key, value] = param.split('=')
+            acc[key] = value
+            return acc
+        }, {})
+        resolve(result)
+    })
 }
 
-const getAuthStr = (options, method='get', url='') => {
-    if(!options.hasOwnProperty('auth')) {
-        console.log('No token specified')
-        return
-    }
-    if(!options.hasOwnProperty('authType')) {
-        console.log('No type specified')
-        return
-    }
-    if(options.authType != 'bearer') {
-        console.log('Unsupported auth type. Supported: bearer')
-        return
-    }
+const getStdinData = () => {
+    return new Promise((resolve, reject) => {
+        if (!process.stdin.isTTY) {
+            let chunks = '';
+            process.stdin.on('data', (chunk) => {
+                chunks += chunk.toString();
+            });
+            process.stdin.on('end', () => {
+                try {
+                    const data = JSON.parse(chunks.trim());
+                    resolve(data);
+                } catch (err) {
+                    reject(err);
+                }
+            });
+            process.stdin.resume();
+        } else {
+            resolve({});
+        }
+    });
+};
+
+const getBearerHeader = (options, method='get', url='') => {
     return {
         headers: {
             'Authorization': `Bearer ${options.auth}`
@@ -83,7 +98,16 @@ const getAuthStr = (options, method='get', url='') => {
     }
 }
 
-const getDigestData = (options, method, url) => {
+const getBasicHeader = (url, method, data, options) => {
+    const base64Content = btoa(options.auth)
+    return {
+        headers: {
+            'Authorization': `Basic ${base64Content}`
+        }
+    }
+}
+
+const getDigestData = (url, method, data, options) => {
     return {
         authData: {
             username: options.auth.split(':')[0],
@@ -92,7 +116,8 @@ const getDigestData = (options, method, url) => {
         requestData: {
             headers: { Accept: "application/json" },
             method: method,
-            url: url
+            url: url,
+            data: data
         }
     }
 }
@@ -107,7 +132,9 @@ module.exports = {
     printBody,
     printErrorHeader,
     convertToObject,
-    getAuthStr,
+    getBearerHeader,
     isEmpty,
-    getDigestData
+    getDigestData,
+    getStdinData,
+    getBasicHeader
 }
