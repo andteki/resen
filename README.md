@@ -90,12 +90,18 @@ Options:
 
 * --auth-type bearer
 * --auth token
+
 * --auth-type digest
+* --auth username:password
+
+* --auth-type basic
+* --auth username:password
 
 Supported auth types:
 
 * bearer
 * digest
+* basic
 
 Using example:
 
@@ -114,6 +120,13 @@ res delete localhost:8000/employees
 ### Digest auhtentication example
 
 ```cmd
-res delete localhost:8000/api/employees 
--A digest -a tom:secret
+res localhost:8000/api/employees 
+--auth-type digest --auth tom:secret
+```
+
+### Basic auhtentication example
+
+```cmd
+res localhost:8000/api/employees 
+--auth-type digest --auth tom:secret
 ```

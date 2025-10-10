@@ -9,7 +9,7 @@ function commandParse() {
     program
         .name('res')
         .description('Command-line HTTP client')
-        .version('0.13.0')
+        .version('0.13.1')
 
     program
         .argument('<url>', 'Server url')
