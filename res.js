@@ -2,7 +2,7 @@
 
 const { Command } = require('commander');
 const { startSend } = require('./comp/sender');
-const version = '0.13.2';
+const version = '0.13.3';
 
 function commandParse() {
     const program = new Command();

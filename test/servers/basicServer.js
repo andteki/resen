@@ -30,6 +30,18 @@ async function start() {
   ));
 
   app.get(ENDPOINT, passport.authenticate('basic', { session: false }), (req, res) => {
+    const USER_AGENT_REGEX = /^Resen\/(\d+\.){2}\d+$/
+    const userAgent = req.headers['user-agent']
+
+    if (!userAgent || !USER_AGENT_REGEX.test(userAgent)) {
+      console.error('Invalid User-Agent:', userAgent);
+      return res.status(400).json({
+        success: false,
+        error: 'Hibás User-Agent formátum',
+        userAgentSent: userAgent
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: [

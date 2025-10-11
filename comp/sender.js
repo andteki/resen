@@ -56,10 +56,11 @@ const trySend = async (url, method, data, options, version) => {
                 return await auth.request(senderData.requestData)
             } else if(options.authType == 'basic') {
                 const header = getBasicHeader(url, method, data, options)
-                return await methodSender(url, method, data, header)
+                header.headers['User-Agent'] = `Resen/${version}`
+                return await methodSender(url, method, data, header, version)
             } else {
                 const header = getBearerHeader(options)
-                return await methodSender(url, method, data, header)
+                return await methodSender(url, method, data, header, version)
             }
         } else {
             const header = getSimpleHeader(url, method, data, options)
@@ -76,6 +77,8 @@ const trySend = async (url, method, data, options, version) => {
 const methodSender = async (url, method, data, header, version) => {
 
     header.headers['User-Agent'] = `Resen/${version}`
+
+    console.log(header)
 
     try {
         if(method.toLowerCase() == 'get') {            
